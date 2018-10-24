@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Advert;
 use App\Repository\AdvertRepository;
 use App\Service\Antispam;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,10 +83,16 @@ class AdvertController extends AbstractController
     /**
      * @Route("/{id}", name="advert.delete", methods={"DELETE"})
      */
-    public function delete($id)
+    public function delete(Advert $advert, EntityManagerInterface $em)
     {
-        return $this->render('advert/index.html.twig', [
-            'controller_name' => 'AdvertController',
-        ]);
+        foreach ($advert->getAdvertSkills() as $advertSkill) {
+            $em->remove($advertSkill);
+        }
+
+        $em->remove($advert);
+
+        $em->flush();
+
+        return $this->redirectToRoute('advert');
     }
 }

@@ -56,10 +56,14 @@
             <i class="glyphicon glyphicon-edit"></i>
             Modifier l'annonce
         </a>
-        <a href="{{ path('advert.delete', {'id': advert.id}) }}" class="btn btn-danger">
-            <i class="glyphicon glyphicon-trash"></i>
-            Supprimer l'annonce
-        </a>
+        <form action="{{ path('advert.delete', {'id': advert.id}) }}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>
+                Supprimer l'annonce
+            </button>
+        </form>
+
     </p>
 
 {% endblock %}
