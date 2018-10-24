@@ -5,13 +5,47 @@
 {% endblock %}
 
 {% block ocplatform_body %}
+    <div class="row">
+        {% if advert.image is not null %}
+            <div class="col-md-2">
+                <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+            </div>
+        {% endif %}
 
-    <h2>{{ advert.title }}</h2>
-    <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+        <div class="col-md-10">
+            <h2>
+                {{ advert.title }}
+            </h2>
+
+            <i>Par {{ advert.author.username }}, le {{ advert.date|date('d/m/Y') }}</i>
+        </div>
+    </div>
+
+
 
     <div class="well">
         {{ advert.content }}
     </div>
+
+    {% if not advert.categories.empty %}
+        <p>
+            Cette annonce est parue dans les catégories suivantes :
+            {% for category in advert.categories %}
+                {{ category.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if advert.advertSkills|length > 0 %}
+        <div>
+            Cette annonce requiert les compétences suivantes :
+            <ul>
+                {% for advertSkill in advert.advertSkills %}
+                    <li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     <p>
         <a href="{{ path('advert') }}" class="btn btn-default">

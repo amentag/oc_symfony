@@ -53,7 +53,7 @@ class Advert
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AdvertSkill", mappedBy="advert")
+     * @ORM\OneToMany(targetEntity="App\Entity\AdvertSkill", mappedBy="advert", cascade={"persist"})
      */
     private $advertSkills;
 
