@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Advert;
 use App\Service\Antispam;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,13 +68,8 @@ class AdvertController extends AbstractController
      */
     public function show($id)
     {
-        $advert = [
-            'title'   => 'Recherche développpeur Symfony2',
-            'id'      => $id,
-            'author'  => 'Alexandre',
-            'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-            'date'    => new \Datetime()
-        ];
+        $advert = new Advert;
+        $advert->setContent("Recherche développeur Symfony3.");
 
         return $this->render('advert/show.html.twig', [
             'advert' => $advert
