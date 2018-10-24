@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Service\Antispam;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -49,11 +51,15 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="advert.new", methods={"GET", "POST"})
      */
-    public function new()
+    public function new(Request $request, Antispam $antispam)
     {
-        return $this->render('advert/index.html.twig', [
-            'controller_name' => 'AdvertController',
-        ]);
+        $text = '...';
+
+        if ($antispam->isSpam($text)) {
+            throw new \Exception('Votre message a été détecté comme spam !');
+        }
+
+        return $this->redirectToRoute('advert');
     }
 
     /**
