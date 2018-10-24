@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Advert;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,5 +18,16 @@ class AdvertRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Advert::class);
+    }
+
+    public function findAllPaginator($page = 1, $limit = 5)
+    {
+        $paginator = new Paginator($this->createQueryBuilder('a')->getQuery());
+
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit); // Limit
+
+        return $paginator;
     }
 }

@@ -20,13 +20,18 @@ class AdvertController extends AbstractController
     /**
      * @Route("/", name="advert", methods={"GET"})
      */
-    public function index(AdvertRepository $advertRepository)
+    public function index(AdvertRepository $advertRepository, Request $request)
     {
-        $adverts = $advertRepository->findAll();
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 5);
+
+        $adverts = $advertRepository->findAllPaginator($page, $limit);
 
         // Et modifiez le 2nd argument pour injecter notre liste
         return $this->render('advert/index.html.twig', [
-            'adverts' => $adverts
+            'adverts' => $adverts,
+            'page' => $page,
+            'pages' => ceil($adverts->count() / $limit),
         ]);
     }
 
