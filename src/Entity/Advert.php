@@ -6,12 +6,16 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertRepository")
  */
 class Advert
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -28,8 +32,6 @@ class Advert
      * @ORM\Column(type="string", length=255)
      */
     private $title;
-
-
 
     /**
      * @ORM\Column(type="date")
@@ -62,6 +64,12 @@ class Advert
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}))
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -220,6 +228,18 @@ class Advert
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
