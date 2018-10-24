@@ -9,7 +9,7 @@ class Antispam
      */
     private $mailer;
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(\Swift_Mailer $mailer, $locale)
     {
         $this->mailer = $mailer;
     }
