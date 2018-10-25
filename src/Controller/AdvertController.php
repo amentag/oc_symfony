@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Form\AdvertEditType;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Service\Antispam;
@@ -74,20 +75,25 @@ class AdvertController extends AbstractController
     /**
      * @Route("/{id}/edit", name="advert.edit", methods={"GET", "PUT"})
      */
-    public function edit($id)
+    public function edit(Advert $advert, Request $request, EntityManagerInterface $em)
     {
-        // ...
+        $form = $this->createForm(AdvertEditType::class, $advert, [
+            'method' => Request::METHOD_PUT
+        ]);
 
-        $advert = [
-            'title'   => 'Recherche développpeur Symfony',
-            'id'      => $id,
-            'author'  => 'Alexandre',
-            'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
-            'date'    => new \Datetime()
-        ];
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            $this->addFlash('notice', 'Annonce bien modifiée.');
+
+            return $this->redirectToRoute('advert.show', ['id' => $advert->getId()]);
+        }
 
         return $this->render('advert/edit.html.twig', [
-            'advert' => $advert
+            'advert' => $advert,
+            'form' => $form->createView()
         ]);
     }
 
