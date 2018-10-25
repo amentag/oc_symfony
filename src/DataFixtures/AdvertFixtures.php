@@ -25,7 +25,7 @@ class AdvertFixtures extends Fixture implements DependentFixtureInterface
             $advert = new Advert();
             $advert
                 ->setAuthor($this->getUser('user_' . rand(1, 5)))
-                ->setImage((new Image())->setAlt('')->setUrl('https://picsum.photos/130/100'))
+                ->setImage((new Image())->setAlt('')->setUrl('https://picsum.photos/130/100?image=' . rand(1, 1000)))
                 ->setContent($faker->text)
                 ->setTitle($faker->sentence);
 
