@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Service\Antispam;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,15 +40,25 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="advert.new", methods={"GET", "POST"})
      */
-    public function new(Request $request, Antispam $antispam)
+    public function new(Request $request, EntityManagerInterface $em, Antispam $antispam)
     {
-        $text = '...';
+        $advert = new Advert();
+        $form = $this->createForm(AdvertType::class, $advert);
 
-        if ($antispam->isSpam($text)) {
-            throw new \Exception('Votre message a été détecté comme spam !');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($advert);
+            $em->flush();
+
+            $this->addFlash('notice', 'Annonce bien enregistrée.');
+
+            return $this->redirectToRoute('advert.show', ['id' => $advert->getId()]);
         }
 
-        return $this->redirectToRoute('advert');
+        return $this->render('advert/new.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
