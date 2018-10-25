@@ -11,7 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdvertType extends AbstractType
@@ -45,6 +48,16 @@ class AdvertType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                /** @var Advert $advert */
+                $advert = $event->getData();
+
+                if (!$advert || !$advert->isPublished() || !$advert->getId()) {
+                    return;
+                }
+
+                $event->getForm()->remove('isPublished');
+            })
         ;
     }
 
