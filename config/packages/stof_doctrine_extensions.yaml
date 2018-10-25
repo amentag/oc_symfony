@@ -6,3 +6,6 @@ stof_doctrine_extensions:
         default:
             sluggable: true
             timestampable: true
+# Uploadable examples
+# https://github.com/maidmaid/tips/blob/master/doc/doctrine/uploadable.md
+#

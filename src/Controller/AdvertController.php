@@ -8,7 +8,9 @@ use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Service\Antispam;
 use Doctrine\ORM\EntityManagerInterface;
+use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,7 +43,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="advert.new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $em, Antispam $antispam)
+    public function new(Request $request, EntityManagerInterface $em)
     {
         $advert = new Advert();
         $form = $this->createForm(AdvertType::class, $advert);
@@ -49,6 +51,7 @@ class AdvertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em->persist($advert);
             $em->flush();
 
