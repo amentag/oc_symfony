@@ -43,7 +43,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="advert.new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $em)
+    public function new(Request $request, EntityManagerInterface $em, UploadableManager $uploadableManager)
     {
         $advert = new Advert();
         $form = $this->createForm(AdvertType::class, $advert);
@@ -51,6 +51,11 @@ class AdvertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $advert->getImage();
+
+            if ($image->getFile() instanceof UploadedFile) {
+                $uploadableManager->markEntityToUpload($image, $image->getFile());
+            }
 
             $em->persist($advert);
             $em->flush();
