@@ -27,8 +27,9 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\UploadableFileName
      */
-    private $alt = 'a';
+    private $alt;
 
     /**
      * @var UploadedFile
