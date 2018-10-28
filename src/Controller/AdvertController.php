@@ -6,7 +6,6 @@ use App\Entity\Advert;
 use App\Form\AdvertEditType;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
-use App\Service\Antispam;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
@@ -83,7 +82,8 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="advert.edit", methods={"GET", "PUT"})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_AUTHOR')", message="Accès limité aux admins et auteurs.")
+     * https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/security.html
      */
     public function edit(Advert $advert, Request $request, EntityManagerInterface $em)
     {
@@ -109,6 +109,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/{id}", name="advert.delete", methods={"DELETE"})
+     * @Security("has_role('ROLE_ADMIN')", message="Accès limité aux admins.")
      */
     public function delete(Advert $advert, EntityManagerInterface $em)
     {
