@@ -8,11 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertRepository")
+ * @UniqueEntity(fields="title", message="Une annonce existe déjà avec ce titre.")
  */
 class Advert
 {
