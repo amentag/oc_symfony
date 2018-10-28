@@ -8,6 +8,7 @@ use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use App\Service\Antispam;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -82,6 +83,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="advert.edit", methods={"GET", "PUT"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function edit(Advert $advert, Request $request, EntityManagerInterface $em)
     {
