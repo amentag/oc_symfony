@@ -11,6 +11,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Validator\Constraint\Antiflood;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertRepository")
@@ -46,6 +47,7 @@ class Advert
      * @ORM\Column(type="date")
      *
      * @Assert\Date()
+     * @Antiflood(message="Mon message personnalisé")
      */
     private $date;
 
