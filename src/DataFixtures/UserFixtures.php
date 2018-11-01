@@ -17,6 +17,7 @@ class UserFixtures extends Fixture
             $manager->persist(
                 (new User())
                     ->setUsername($username)
+                    ->setEmail($username . '@gmail.com')
                     ->setPassword($username . 'pass')
                     ->setRoles(['ROLE_' . strtoupper($username)])
                     ->setSalt('')
@@ -25,14 +26,14 @@ class UserFixtures extends Fixture
 
         for ($i = 1; $i <= 5; $i++) {
             $user = new User();
+            $username = $faker->userName;
 
             $user
-                ->setUsername($faker->userName)
+                ->setUsername($username)
+                ->setEmail($username . '@gmail.com')
                 ->setPassword($faker->password)
                 ->setRoles(['ROLE_AUTHOR'])
-                ->setSalt('')
-
-            ;
+                ->setSalt('');
 
             $manager->persist($user);
 
