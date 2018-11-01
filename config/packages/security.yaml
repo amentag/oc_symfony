@@ -4,15 +4,15 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
 
     role_hierarchy:
-        ROLE_AUTHOR:       ROLE_USER
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_AUTHOR, ROLE_MODERATOR]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    author:  { password: authorpass, roles: [ 'ROLE_AUTHOR' ] }
+                    moderator:  { password: moderatorpass, roles: [ 'ROLE_MODERATOR' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
