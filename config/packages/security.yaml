@@ -22,21 +22,24 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main_login:
             # Cette expression régulière permet de prendre /login (mais pas /login_check !)
             pattern:   ^/login$
             anonymous: true # On autorise alors les anonymes sur ce pare-feu
-        main:
-            pattern: ^/
-            anonymous: false
-            provider:  my_provider # ici je choisis le provider in_memory ou my_provider
-            form_login:
-                login_path: login
-                check_path: login_check
-            logout:
-                path:       logout
-                target:     login
 
+        main:
+            pattern:      ^/
+            anonymous:    false
+            provider:     my_provider
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:       fos_user_security_logout
+                target:     fos_user_security_login
+            remember_me:
+                secret:     '%kernel.secret%'
             # activate different ways to authenticate
 
             # http_basic: true
