@@ -13,12 +13,26 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create();
 
+        foreach (['author', 'moderator', 'admin'] as $username) {
+            $manager->persist(
+                (new User())
+                    ->setUsername($username)
+                    ->setPassword($username . 'pass')
+                    ->setRoles(['ROLE_' . strtoupper($username)])
+                    ->setSalt('')
+            );
+        }
+
         for ($i = 1; $i <= 5; $i++) {
             $user = new User();
 
             $user
                 ->setUsername($faker->userName)
-                ->setPassword($faker->password);
+                ->setPassword($faker->password)
+                ->setRoles(['ROLE_AUTHOR'])
+                ->setSalt('')
+
+            ;
 
             $manager->persist($user);
 

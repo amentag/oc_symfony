@@ -1,6 +1,7 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        App\Entity\User: plaintext
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
 
     role_hierarchy:
@@ -11,9 +12,13 @@ security:
         in_memory:
             memory:
                 users:
-                    author:  { password: authorpass, roles: [ 'ROLE_AUTHOR' ] }
-                    moderator:  { password: moderatorpass, roles: [ 'ROLE_MODERATOR' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    author2:  { password: authorpass, roles: [ 'ROLE_AUTHOR' ] }
+                    moderator2:  { password: moderatorpass, roles: [ 'ROLE_MODERATOR' ] }
+                    admin2: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        my_provider:
+            entity:
+                class:    App\Entity\User
+                property: username
 
     firewalls:
         dev:
@@ -26,6 +31,7 @@ security:
         main:
             pattern: ^/
             anonymous: false
+            provider:  my_provider # ici je choisis le provider in_memory ou my_provider
             form_login:
                 login_path: login
                 check_path: login_check
