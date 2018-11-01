@@ -18,9 +18,10 @@ class UserFixtures extends Fixture
                 (new User())
                     ->setUsername($username)
                     ->setEmail($username . '@gmail.com')
-                    ->setPassword($username . 'pass')
+                    ->setPlainPassword($username . 'pass')
                     ->setRoles(['ROLE_' . strtoupper($username)])
                     ->setSalt('')
+                    ->setEnabled(true)
             );
         }
 
@@ -31,15 +32,15 @@ class UserFixtures extends Fixture
             $user
                 ->setUsername($username)
                 ->setEmail($username . '@gmail.com')
-                ->setPassword($faker->password)
+                ->setPlainPassword($username)
                 ->setRoles(['ROLE_AUTHOR'])
-                ->setSalt('');
+                ->setSalt('')
+                ->setEnabled(true);
 
             $manager->persist($user);
 
             $this->addReference("user_$i", $user);
         }
-
         $manager->flush();
     }
 }
