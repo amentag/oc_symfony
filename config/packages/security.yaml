@@ -23,23 +23,29 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main_login:
-            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
-            pattern:   ^/login$
-            anonymous: true # On autorise alors les anonymes sur ce pare-feu
-
         main:
-            pattern:      ^/
-            anonymous:    false
-            provider:     my_provider
+            pattern: ^/
             form_login:
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-            logout:
-                path:       fos_user_security_logout
-                target:     fos_user_security_login
+                provider: my_provider
+                csrf_token_generator: security.csrf.token_manager
+            logout:       true
+            anonymous:    true
             remember_me:
                 secret:     '%kernel.secret%'
+#        main:
+#            pattern:      ^/
+#            anonymous:    false
+#            provider:     my_provider
+#            form_login:
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
+#            logout:
+#                path:       fos_user_security_logout
+#                target:     fos_user_security_login
+#            remember_me:
+#                secret:     '%kernel.secret%'
+#
+
             # activate different ways to authenticate
 
             # http_basic: true
@@ -51,5 +57,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_FULLY }
