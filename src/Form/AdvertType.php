@@ -33,7 +33,7 @@ class AdvertType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'username',
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CkeditorType::class, [
                 'label' => 'Contenu'
             ])
             ->add('isPublished', CheckboxType::class, [

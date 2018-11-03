@@ -4,6 +4,7 @@
     Modifier une annonce - {{ parent() }}
 {% endblock %}
 
+
 {% block ocplatform_body %}
 
     <h2>Modifier une annonce</h2>
@@ -15,4 +16,12 @@
         l'esprit général de l'annonce déjà publiée.
     </p>
 
+{% endblock %}
+
+{#{% block stylesheets %}#}
+    {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.10.1/contents.css">#}
+{#{% endblock %}#}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.10.1/ckeditor.js"></script>
 {% endblock %}
