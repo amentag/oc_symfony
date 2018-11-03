@@ -14,11 +14,17 @@ class Antispam
      */
     private $limit;
 
-    public function __construct(\Swift_Mailer $mailer, string $locale, int $limit)
+    public function __construct(\Swift_Mailer $mailer, int $limit)
     {
         $this->mailer = $mailer;
-        $this->locale = $locale;
         $this->limit = $limit;
+    }
+
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 
     /**
