@@ -20,6 +20,9 @@ class Antispam
         $this->limit = $limit;
     }
 
+    /**
+     * @required
+     */
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
