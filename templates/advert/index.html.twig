@@ -12,7 +12,7 @@
         {% for advert in adverts %}
             <li>
                 <a href="{{ path('advert.show', {'id': advert.id}) }}">
-                    {{ advert.title }}
+                    {{ checkIfSpam(advert.title) ? 'Ceci est un spam' : advert.title }}
                 </a>
                 par {{ advert.author.username }},
                 le {{ advert.date|date('d/m/Y') }}
