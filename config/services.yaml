@@ -39,5 +39,11 @@ services:
             $endDate: '2018-11-05'
         tags:
             - { name: kernel.event_listener, event: kernel.response }
+    App\Listener\MessageListener:
+        arguments:
+            $notificator: '@App\Service\MessageNotificator'
+            $listUsers: [ author ]
+        tags:
+            - { name: kernel.event_listener, event: platform.post_message, method: processMessage }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
