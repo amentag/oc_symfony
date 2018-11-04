@@ -45,5 +45,12 @@ services:
             $listUsers: [ author ]
         tags:
             - { name: kernel.event_listener, event: platform.post_message, method: processMessage }
+    App\Subscriber\MessageSubscriber:
+        arguments:
+            $notificator: '@App\Service\MessageNotificator'
+            $listUsers: [ author ]
+        tags:
+            - { name: kernel.event_subscriber }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
