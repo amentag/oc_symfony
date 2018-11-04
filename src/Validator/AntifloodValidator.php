@@ -27,6 +27,7 @@ class AntifloodValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        return;
         $last = $this->advertRepository->findOneBy([], ['date' => 'desc']);
 
         /** @var DateTime $date */
