@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "menu.main.title"
+msgstr "Homepage"
+
+msgid "advert.list"
+msgstr "advert list"
+
+msgid "advert.new"
+msgstr "Create an advert"
+
+msgid "menu.related.title"
+msgstr "Last adverts"
+
+msgid "Adverts"
+msgstr "Adverts"
+
+msgid "advert.list.back"
+msgstr "Back to advert list"
+
+msgid "advert.update"
+msgstr "Edit advert"
+
+msgid "advert.delete"
+msgstr "delete advert"
+
+msgid "advert.update.mention"
+msgstr "__advert.update.mention"
+
+msgid "advert.back"
+msgstr "Back to the advert"
+
+msgid "advert.new.title"
+msgstr "New advert"
+
+msgid "spam.message"
+msgstr "This is a spam"
+
+msgid "advert.form.title"
+msgstr "Form adverts"
+
+msgid "button.save"
+msgstr "save"

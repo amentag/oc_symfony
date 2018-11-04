@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "menu.main.title"
+msgstr "annonces"
+
+msgid "advert.list"
+msgstr "accueil"
+
+msgid "advert.new"
+msgstr "ajouter une annonces"
+
+msgid "menu.related.title"
+msgstr "dernières annonces"
+
+msgid "Adverts"
+msgstr "Annonces"
+
+msgid "advert.update"
+msgstr "modifier une annonces"
+
+msgid "advert.back"
+msgstr "revenir à l'annonce"
+
+msgid "advert.update.mention"
+msgstr "vous éditez une annonce déjà existante, merci de ne pas changer l'esprit général de l'annonce déjà publiée."
+
+msgid "advert.form.title"
+msgstr "formulaire d'annonce"
+
+msgid "button.save"
+msgstr "enregitrer"
+
+msgid "advert.list.back"
+msgstr "revenir à la liste des annonces"
+
+msgid "advert.delete"
+msgstr "supprimer une annonce"
+
+msgid "advert.new.title"
+msgstr "nouvelle annonce"
+
+msgid "spam.message"
+msgstr "ceci est un spam"
