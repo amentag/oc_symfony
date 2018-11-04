@@ -1,13 +1,14 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Modifier une annonce - {{ parent() }}
+    {{ 'advert.new.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 
 {% block ocplatform_body %}
 
-    <h2>Modifier une annonce</h2>
+    <h2>{{ 'advert.new.title'|trans }}</h2>
+    {#Nouvelle annonce#}
 
     {{ include("advert/form.html.twig") }}
 

@@ -6,19 +6,21 @@
 
 {% block ocplatform_body %}
 
-    <h2>Liste des annonces</h2>
-
+    <h2>{{ "advert.list"|trans }}</h2>
+    {#Liste des annonces#}
     <ul>
         {% for advert in adverts %}
             <li>
                 <a href="{{ path('advert.show', {'id': advert.id}) }}">
-                    {{ checkIfSpam(advert.title) ? 'Ceci est un spam' : advert.title }}
+                    {{ checkIfSpam(advert.title) ? 'spam.message'|trans : advert.title }}
+                    {#Ceci est un spam#}
                 </a>
                 par {{ advert.author.username }},
                 le {{ advert.date|date('d/m/Y') }}
             </li>
         {% else %}
-            <li>Pas (encore !) d'annonces</li>
+            <li>{{ 'adverts.empty' }}</li>
+            {#Pas (encore !) d'annonces#}
         {% endfor %}
     </ul>
     <ul class="pagination">

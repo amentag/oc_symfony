@@ -1,16 +1,17 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Modifier une annonce - {{ parent() }}
+    {{ 'advert.update'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
 
-    <h2>Modifier une annonce</h2>
+    <h2>{{ 'advert.update'|trans|capitalize }}</h2>
 
     {{ include("advert/form.html.twig") }}
 
     <p>
+        {{ 'advert.update.mention'|trans }}
         Vous éditez une annonce déjà existante, merci de ne pas changer
         l'esprit général de l'annonce déjà publiée.
     </p>
@@ -18,7 +19,7 @@
     <p>
         <a href="{{ path('advert.show', {'id': advert.id}) }}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>
-            Retour à l'annonce
+            {{ 'advert.back'|trans }}
         </a>
     </p>
 

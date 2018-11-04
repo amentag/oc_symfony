@@ -1,10 +1,10 @@
-<h3>Formulaire d'annonce</h3>
+<h3>{{ 'advert.form.title'|trans }}</h3>
 
 {# On laisse vide la vue pour l'instant, on la comblera plus tard
    lorsqu'on saura afficher un formulaire. #}
 <div class="well">
     {{ form_start(form) }}
         {{ form_rest(form) }}
-        <button type="submit" formnovalidate>Enregitrer</button>
+        <button type="submit" formnovalidate>{{ 'button.save'|trans }}</button>
     {{ form_end(form) }}
 </div>
