@@ -24,6 +24,8 @@ class BetaListener
         $this->endDate = new DateTime($endDate);
     }
 
+    // le nom de la méthode doit correspondre au nom de l'événement sur lequel le listener écoute
+    // ex: event: kernel.response => method; onKernelResponse
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $today = new DateTime('today');
