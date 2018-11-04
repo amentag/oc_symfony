@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Event\MessagePostEvent;
+use App\Event\PlatformEvents;
 use App\Form\AdvertEditType;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
@@ -10,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +46,7 @@ class AdvertController extends AbstractController
     /**
      * @Route("/new", name="advert.new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $em, UploadableManager $uploadableManager)
+    public function new(Request $request, EntityManagerInterface $em, UploadableManager $uploadableManager, EventDispatcherInterface $eventDispatcher)
     {
         $advert = new Advert();
         $form = $this->createForm(AdvertType::class, $advert);
@@ -56,6 +59,14 @@ class AdvertController extends AbstractController
             if ($image->getFile() instanceof UploadedFile) {
                 $uploadableManager->markEntityToUpload($image, $image->getFile());
             }
+
+            $event = new MessagePostEvent($advert->getContent(), $advert->getAuthor());
+
+            // On déclenche l'évènement
+            $eventDispatcher->dispatch(PlatformEvents::POST_MESSAGE, $event);
+
+            // On récupère ce qui a été modifié par le ou les listeners, ici le message
+            $advert->setContent($event->getMessage());
 
             $em->persist($advert);
             $em->flush();
