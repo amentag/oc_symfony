@@ -1,4 +1,8 @@
 framework:
+    translator:
+        fallbacks:
+            - '%locale%'
+    default_locale: '%locale%'
     templating:
         engines: ["twig", "php"]
 
