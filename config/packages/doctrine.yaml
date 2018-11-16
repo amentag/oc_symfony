@@ -7,6 +7,12 @@ parameters:
 
 doctrine:
     dbal:
+        types:
+            point:  App\Doctrine\Type\PointType
+            money:  App\Doctrine\Type\MoneyType
+        mapping_types:
+            point: point
+            money: money
         # configure these for your database server
         driver: 'pdo_mysql'
         server_version: '5.7'
